@@ -1,0 +1,12 @@
+git clone "repository path"
+
+git status
+
+git add .
+
+git commit -m "comments updates"
+
+git push
+
+
+git pull
