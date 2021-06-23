@@ -9,8 +9,12 @@
 		
 		if(mysqli_num_rows($rs) > 0){
 			
-			header('Location: dashboard.php');
-			die;
+			$rec = mysqli_fetch_assoc($rs);
+			
+			$_SESSION['admin_user'] = $rec;
+			
+			redirect('dashboard.php');
+			
 			//echo 'redirect to dashboard';
 		}else{
 			echo 'error message - incorrect login details';

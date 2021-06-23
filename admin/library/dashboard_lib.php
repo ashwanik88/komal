@@ -1,1 +1,2 @@
-<?php 
+<?php checkAdminLogin();
+$document_title = 'Dashboard';
