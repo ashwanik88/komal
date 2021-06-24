@@ -13,12 +13,15 @@
 			
 			$_SESSION['admin_user'] = $rec;
 			
+			
+			addAlert('success', 'Successfully logged in to admin panel!');
+			
 			redirect('dashboard.php');
 			
 			//echo 'redirect to dashboard';
 		}else{
-			echo 'error message - incorrect login details';
+			addAlert('danger', 'Incorrect Username/Password!');
 		}
-		die;
+		redirect('index.php');
 	}
 }

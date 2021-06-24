@@ -2,7 +2,7 @@
 
 (function () {
   'use strict'
-
+  setTimeout(function(){ $('.btn-close').trigger('click'); }, 3000);
   feather.replace()
 
   // Graphs
