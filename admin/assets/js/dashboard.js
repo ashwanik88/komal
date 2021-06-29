@@ -2,9 +2,6 @@
 
 (function () {
   'use strict'
-  setTimeout(function(){ $('.btn-close').trigger('click'); }, 3000);
-  feather.replace()
-
   // Graphs
   var ctx = document.getElementById('myChart')
   // eslint-disable-next-line no-unused-vars

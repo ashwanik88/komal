@@ -161,4 +161,11 @@ require_once('library/dashboard_lib.php');
     </main>
 	
 
-<?php require_once('common/footer.php'); ?>
+<?php require_once('common/footer_upper.php'); ?>
+<?php require_once('common/footer_script.php'); ?>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
+	  
+<script src="assets/js/dashboard.js"></script>
+
+<?php require_once('common/footer_end.php'); ?>
