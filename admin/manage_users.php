@@ -26,7 +26,7 @@ require_once('library/manage_users_lib.php');
         <table class="table table-striped table-sm">
           <thead>
             <tr>
-              <th><input type="checkbox" onclick="$('.chk').attr('checked', $(this).is(':checked'));" /></th>
+              <th><input type="checkbox" onclick="$('.chk').prop('checked', $(this).is(':checked'));" /></th>
               <th>#</th>
               <th>Username</th>
               <th>Fullname</th>

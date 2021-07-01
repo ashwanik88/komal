@@ -3,7 +3,7 @@
 		$username = $_POST['username'];
 		$password = md5($_POST['password']);
 		
-		$sql = "SELECT * FROM admin_users WHERE username='". $username ."' AND password='". $password ."'";
+		$sql = "SELECT * FROM admin_users WHERE username='". $username ."' AND password='". $password ."' AND status=1";
 		
 		$rs = mysqli_query($con, $sql);
 		
