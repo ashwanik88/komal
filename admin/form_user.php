@@ -15,6 +15,7 @@ require_once('library/form_user_lib.php');
 		
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
+            <a href="manage_users.php" class="btn btn-sm btn-outline-info">Back</a>
             <button type="submit" class="btn btn-sm btn-outline-success">Save</button>
           </div>
         </div>

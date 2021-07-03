@@ -49,7 +49,7 @@ require_once('library/manage_users_lib.php');
 						<td><?php echo $row['phone']; ?></td>
 						<td><?php echo ($row['status'])?'Active':'Inactive'; ?></td>
 						<td><?php echo $row['date_added']; ?></td>
-						<td>Edit</td>
+						<td><a href="form_user.php?admin_id=<?php echo $row['admin_id']; ?>">Edit</a></td>
 					</tr>
 				<?php } ?>
 			<?php }else{ ?>
