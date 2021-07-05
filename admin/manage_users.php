@@ -7,6 +7,7 @@ require_once('library/manage_users_lib.php');
 
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+		<form method="POST" action="">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2"><?php echo $document_title; ?></h1>
 		
@@ -15,7 +16,7 @@ require_once('library/manage_users_lib.php');
 		
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
+            <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure want to delete ?')">Delete</button>
             <a class="btn btn-sm btn-outline-primary" href="form_user.php">Add New User</a>
           </div>
         </div>
@@ -49,7 +50,13 @@ require_once('library/manage_users_lib.php');
 						<td><?php echo $row['phone']; ?></td>
 						<td><?php echo ($row['status'])?'Active':'Inactive'; ?></td>
 						<td><?php echo $row['date_added']; ?></td>
-						<td><a href="form_user.php?admin_id=<?php echo $row['admin_id']; ?>">Edit</a></td>
+						<td>
+							
+							<a href="manage_users.php?admin_id=<?php echo $row['admin_id']; ?>" onclick="return confirm('Are you sure want to delete ?')">Delete</a> |
+							<a href="form_user.php?admin_id=<?php echo $row['admin_id']; ?>">Edit</a>
+						
+						
+						</td>
 					</tr>
 				<?php } ?>
 			<?php }else{ ?>
@@ -58,6 +65,7 @@ require_once('library/manage_users_lib.php');
           </tbody>
         </table>
       </div>
+    </form>
     </main>
 	
 
