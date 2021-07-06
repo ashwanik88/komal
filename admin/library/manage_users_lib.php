@@ -22,8 +22,18 @@ if($_POST){
 	
 }
 
+$sort = 'admin_id';
+$order = 'DESC';
+if(isset($_GET['sort']) && !empty($_GET['sort'])){
+	$sort = $_GET['sort'];
+}
+if(isset($_GET['order']) && !empty($_GET['order'])){
+	$order = $_GET['order'];
+}
+$sorting = 'ORDER BY '. $sort .' ' . $order;
+$order = ($order == 'ASC')?'DESC':'ASC';
 
-$sql = "SELECT * FROM admin_users";
+$sql = "SELECT * FROM admin_users " . $sorting;
 
 $rs = mysqli_query($con, $sql);
 

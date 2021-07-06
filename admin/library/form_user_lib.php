@@ -4,6 +4,7 @@ $document_title = 'Add New User';
 $admin_id = '';
 $username = '';
 $password = '';
+$gender = '';
 $cpassword = '';
 $fullname = '';
 $email = '';
@@ -19,6 +20,7 @@ if($_GET){
 		$username = $data['username'];
 		$fullname = $data['fullname'];
 		$email = $data['email'];
+		$gender = $data['gender'];
 		$phone = $data['phone'];
 		$status = $data['status'];
 		
@@ -41,6 +43,7 @@ if($_POST){
 		$fullname = $_POST['fullname'];
 		$email = $_POST['email'];
 		$phone = $_POST['phone'];
+		$gender = $_POST['gender'];
 		$status = (isset($_POST['status']))?1:0;
 		
 		if($password == $cpassword){
@@ -48,7 +51,7 @@ if($_POST){
 			if(!alreadyExists($username, $admin_id)){
 				
 				if($admin_id){
-					$sql = "UPDATE admin_users SET username='". $username ."', fullname='". $fullname ."', email='". $email ."', phone='". $phone ."', status='". (int)$status ."', date_modified=NOW() WHERE admin_id='". (int)$admin_id ."'";
+					$sql = "UPDATE admin_users SET username='". $username ."', fullname='". $fullname ."', email='". $email ."', phone='". $phone ."', status='". (int)$status ."', gender='". $gender ."', date_modified=NOW() WHERE admin_id='". (int)$admin_id ."'";
 					mysqli_query($con, $sql);
 					addAlert('success', 'User has been updated successfully');
 					
@@ -57,7 +60,7 @@ if($_POST){
 						mysqli_query($con, $sql_pass);
 					}
 				}else{
-					$sql = "INSERT INTO admin_users SET username='". $username ."', password='". md5($password) ."', fullname='". $fullname ."', email='". $email ."', phone='". $phone ."', status='". (int)$status ."', date_added=NOW()";
+					$sql = "INSERT INTO admin_users SET username='". $username ."', password='". md5($password) ."', fullname='". $fullname ."', email='". $email ."', phone='". $phone ."', gender='". $gender ."', status='". (int)$status ."', date_added=NOW()";
 					mysqli_query($con, $sql);
 					addAlert('success', 'User has been added successfully');
 					$admin_id = mysqli_insert_id($con);

@@ -66,6 +66,20 @@ require_once('library/form_user_lib.php');
 		</div>
 		
 		<div class="mb-3 row">
+			<label for="gender" class="col-sm-2 col-form-label">Gender</label>
+			<div class="col-sm-10">
+				<label>
+				<input type="radio" id="gender_m" name="gender" value="Male" <?php echo ($gender == 'Male')?'checked': ''; ?>> Male
+				</label>
+				
+				<label>
+				<input type="radio" id="gender_f" name="gender" value="Female" <?php echo ($gender == 'Female')?'checked': ''; ?>> Female
+				</label>
+				</div>
+			</div>
+		</div>
+		
+		<div class="mb-3 row">
 			<label for="status" class="col-sm-2 col-form-label">Status</label>
 			<div class="col-sm-10">
 				<div class="form-check form-switch">

@@ -28,8 +28,8 @@ require_once('library/manage_users_lib.php');
           <thead>
             <tr>
               <th><input type="checkbox" onclick="$('.chk').prop('checked', $(this).is(':checked'));" /></th>
-              <th>#</th>
-              <th>Username</th>
+              <th><a href="manage_users.php?sort=admin_id&order=<?php echo $order; ?>">#</a></th>
+              <th><a href="manage_users.php?sort=username&order=<?php echo $order; ?>">Username</a></th>
               <th>Fullname</th>
               <th>Email</th>
               <th>Phone</th>
