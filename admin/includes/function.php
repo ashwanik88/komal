@@ -24,3 +24,7 @@ function displayAlert(){
 	}
 	return $html;
 }
+
+function changeDateFormat($str){
+	return date('d/m/Y h:i:s A', strtotime($str));
+}

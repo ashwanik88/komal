@@ -30,11 +30,11 @@ require_once('library/manage_users_lib.php');
               <th><input type="checkbox" onclick="$('.chk').prop('checked', $(this).is(':checked'));" /></th>
               <th><a href="manage_users.php?sort=admin_id&order=<?php echo $order; ?>">#</a></th>
               <th><a href="manage_users.php?sort=username&order=<?php echo $order; ?>">Username</a></th>
-              <th>Fullname</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>Status</th>
-              <th>Date Added</th>
+              <th><a href="manage_users.php?sort=fullname&order=<?php echo $order; ?>">Fullname</a></th>
+              <th><a href="manage_users.php?sort=email&order=<?php echo $order; ?>">Email</a></th>
+              <th><a href="manage_users.php?sort=phone&order=<?php echo $order; ?>">Phone</a></th>
+              <th><a href="manage_users.php?sort=status&order=<?php echo $order; ?>">Status</a></th>
+              <th><a href="manage_users.php?sort=date_added&order=<?php echo $order; ?>">Date Added</a></th>
               <th>Action</th>
             </tr>
           </thead>
@@ -49,7 +49,7 @@ require_once('library/manage_users_lib.php');
 						<td><?php echo $row['email']; ?></td>
 						<td><?php echo $row['phone']; ?></td>
 						<td><?php echo ($row['status'])?'Active':'Inactive'; ?></td>
-						<td><?php echo $row['date_added']; ?></td>
+						<td><?php echo changeDateFormat($row['date_added']); ?></td>
 						<td>
 							
 							<a href="manage_users.php?admin_id=<?php echo $row['admin_id']; ?>" onclick="return confirm('Are you sure want to delete ?')">Delete</a> |
@@ -64,6 +64,31 @@ require_once('library/manage_users_lib.php');
 			<?php } ?>
           </tbody>
         </table>
+		
+<nav aria-label="...">
+  <ul class="pagination">
+    <li class="page-item disabled">
+      <span class="page-link">Previous</span>
+    </li>
+	
+	
+    <?php for($i = 1; $i <= $total_pages; $i++){ ?>
+	<?php if($i == $cur_page){ ?>
+	<li class="page-item active" aria-current="page">
+      <span class="page-link"><?php echo $i; ?></span>
+    </li>
+	<?php }else{ ?>
+	<li class="page-item"><a class="page-link" href="manage_users.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>	
+	<?php } ?>
+	<?php } ?>
+	
+	
+    <li class="page-item">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav>
+
       </div>
     </form>
     </main>

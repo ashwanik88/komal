@@ -33,7 +33,22 @@ if(isset($_GET['order']) && !empty($_GET['order'])){
 $sorting = 'ORDER BY '. $sort .' ' . $order;
 $order = ($order == 'ASC')?'DESC':'ASC';
 
-$sql = "SELECT * FROM admin_users " . $sorting;
+$page_size = 10;
+$sql_total = "SELECT count(*) as total FROM admin_users";
+$rs_total = mysqli_query($con, $sql_total);
+$rec_total = mysqli_fetch_assoc($rs_total);
+$total_pages = ceil($rec_total['total']/$page_size);
+
+$page_index = 0;
+$cur_page = 1;
+if(isset($_GET['page'])){
+	$cur_page = $_GET['page'];
+	$page_index = ($cur_page - 1) * $page_size;
+}
+
+$sql = "SELECT * FROM admin_users " . $sorting . " LIMIT ". $page_index ."," . $page_size;
+
+
 
 $rs = mysqli_query($con, $sql);
 
@@ -54,3 +69,12 @@ function deleteUser($user_id){
 		addAlert('danger', 'You can\'t delete current user id!');
 	}
 }
+
+/*
+task 
+
+1) next previous button
+2) pagination with sorting
+3) add serial number column
+
+*/
