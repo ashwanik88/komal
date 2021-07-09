@@ -24,17 +24,34 @@ if($_POST){
 
 $sort = 'admin_id';
 $order = 'DESC';
+$filter_url = '';
+$filter_admin_id = '';
+$filter_username = '';
+
+$searching = ' WHERE 1=1 ';
+if(isset($_GET['filter_admin_id']) && !empty($_GET['filter_admin_id'])){
+	$filter_admin_id = $_GET['filter_admin_id'];
+	$searching .= " AND admin_id='". $filter_admin_id ."'";
+}
+if(isset($_GET['filter_username']) && !empty($_GET['filter_username'])){
+	$filter_username = $_GET['filter_username'];
+	$searching .= " AND username LIKE '%". $filter_username ."%'";
+}
+
+
 if(isset($_GET['sort']) && !empty($_GET['sort'])){
 	$sort = $_GET['sort'];
+	$filter_url .= '&sort=' . $sort;
 }
 if(isset($_GET['order']) && !empty($_GET['order'])){
 	$order = $_GET['order'];
+	$filter_url .= '&order=' . $order;
 }
 $sorting = 'ORDER BY '. $sort .' ' . $order;
 $order = ($order == 'ASC')?'DESC':'ASC';
 
 $page_size = 10;
-$sql_total = "SELECT count(*) as total FROM admin_users";
+$sql_total = "SELECT count(*) as total FROM admin_users" . $searching;
 $rs_total = mysqli_query($con, $sql_total);
 $rec_total = mysqli_fetch_assoc($rs_total);
 $total_pages = ceil($rec_total['total']/$page_size);
@@ -46,7 +63,7 @@ if(isset($_GET['page'])){
 	$page_index = ($cur_page - 1) * $page_size;
 }
 
-$sql = "SELECT * FROM admin_users " . $sorting . " LIMIT ". $page_index ."," . $page_size;
+$sql = "SELECT * FROM admin_users ". $searching ." " . $sorting . " LIMIT ". $page_index ."," . $page_size;
 
 
 
@@ -68,6 +85,16 @@ function deleteUser($user_id){
 	}else{
 		addAlert('danger', 'You can\'t delete current user id!');
 	}
+}
+function columnHeading($field, $field_text, $order, $sort){
+	$html = '<a href="manage_users.php?sort='. $field .'&order='. $order .'">' . $field_text;
+	if($sort == $field){
+	$html .= ' <i class="bi bi-caret-';
+	$html .= ($order == 'ASC')?'down':'up';
+	$html .= '-fill"></i>';
+	} 
+	$html .= '</a>';
+	return $html;
 }
 
 /*
