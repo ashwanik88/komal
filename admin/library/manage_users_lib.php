@@ -27,6 +27,8 @@ $order = 'DESC';
 $filter_url = '';
 $filter_admin_id = '';
 $filter_username = '';
+$filter_date_added = '';
+$filter_status = '';
 
 $searching = ' WHERE 1=1 ';
 if(isset($_GET['filter_admin_id']) && !empty($_GET['filter_admin_id'])){
@@ -36,6 +38,17 @@ if(isset($_GET['filter_admin_id']) && !empty($_GET['filter_admin_id'])){
 if(isset($_GET['filter_username']) && !empty($_GET['filter_username'])){
 	$filter_username = $_GET['filter_username'];
 	$searching .= " AND username LIKE '%". $filter_username ."%'";
+}
+if(isset($_GET['filter_date_added'])){
+	$filter_date_added = $_GET['filter_date_added'];
+	$searching .= " AND ( date_added>='". $filter_date_added ." 00:00:00' AND date_added <= '". $filter_date_added ." 23:59:59' )";
+	//SELECT * FROM `admin_users` WHERE date_added>='2021-07-06 00:00:00' AND date_added <= '2021-07-06 23:59:59' 
+	//SELECT * FROM `admin_users` WHERE date_added BETWEEN '2021-07-06' AND '2021-07-07' 
+	
+}
+if(isset($_GET['filter_status'])){
+	$filter_status = $_GET['filter_status'];
+	$searching .= " AND status = '". $filter_status ."'";
 }
 
 

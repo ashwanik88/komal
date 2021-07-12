@@ -7,7 +7,7 @@ require_once('library/manage_users_lib.php');
 
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-		<form method="POST" action="">
+		<form method="POST" action="" id="frm">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2"><?php echo $document_title; ?></h1>
 		
@@ -16,7 +16,7 @@ require_once('library/manage_users_lib.php');
 		
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
-            <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure want to delete ?')">Delete</button>
+            <button type="button" class="btn btn-sm btn-outline-danger" onclick="(confirm('Are you sure want to delete ?'))?$('#frm').submit():''">Delete</button>
             <a class="btn btn-sm btn-outline-primary" href="form_user.php">Add New User</a>
           </div>
         </div>
@@ -57,12 +57,12 @@ require_once('library/manage_users_lib.php');
 				<th>
 					<select name="filter_status" id="filter_status">
 						<option value=""></option>
-						<option value="1">Active</option>
-						<option value="0">Inactive</option>
+						<option value="1" <?php echo ($filter_status == 1)?'selected="selected"':''; ?>>Active</option>
+						<option value="0" <?php echo ($filter_status === '0')?'selected="selected"':''; ?>>Inactive</option>
 					</select>
 				</th>
 				<th>
-					<input type="text" name="filter_date_added" id="filter_date_added" value="" size="12" />
+					<input type="date" name="filter_date_added" id="filter_date_added" value="<?php echo $filter_date_added; ?>" size="12"/>
 				</th>
 				<th><input type="button" id="btnFliter" class="btn btn-info btn-sm" value="Filter" /></th>
 			</tr>
@@ -126,6 +126,7 @@ require_once('library/manage_users_lib.php');
 <?php require_once('common/footer_upper.php'); ?>
 <?php require_once('common/footer_script.php'); ?>
 <script type="text/javascript">
+
 $('#btnFliter').click(function(){
 	var url = 'manage_users.php?';
 	
@@ -137,6 +138,16 @@ $('#btnFliter').click(function(){
 	var filter_username = $('#filter_username').val();
 	if(filter_username != ''){
 		url += '&filter_username=' + filter_username;
+	}
+
+	var filter_date_added = $('#filter_date_added').val();
+	if(filter_date_added != ''){
+		url += '&filter_date_added=' + filter_date_added;
+	}
+	
+	var filter_status = $('#filter_status').val();
+	if(filter_status != ''){
+		url += '&filter_status=' + filter_status;
 	}
 	
 	window.location.href = url;
