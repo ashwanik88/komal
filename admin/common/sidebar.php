@@ -16,6 +16,12 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="manage_categories.php">
+              <span data-feather="users"></span>
+              Manage Categories
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="file"></span>
               Orders
