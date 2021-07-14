@@ -27,7 +27,7 @@ require_once('library/form_category_lib.php');
 			  <select name="parent_id" id="parent_id" class="form-select">
 				<option value=""></option>
 				<option value="0">Top Parent</option>
-				<?php echo getCategories();?>
+				<?php echo getCategories(0, '', $parent_id);?>
 			  </select>
 			</div>
 		</div>

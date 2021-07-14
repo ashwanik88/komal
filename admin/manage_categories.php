@@ -27,32 +27,12 @@ require_once('library/manage_categories_lib.php');
           <thead>
             <tr>
               <th><input type="checkbox" onclick="$('.chk').prop('checked', $(this).is(':checked'));" /></th>
-              <th><?php echo columnHeading('category_id', '#', $order, $sort); ?></th>
-              <th><?php echo columnHeading('category_name', 'Category Name', $order, $sort); ?></th>
-              <th><?php echo columnHeading('parent_id', 'Parent', $order, $sort); ?></th>
-              <th><?php echo columnHeading('status', 'Status', $order, $sort); ?></th>
-              <th>Action</th>
+			  <th>Category ID</th>
+			  <th>Category Name</th>
+			  <th>Parent ID</th>
+			  <th>Status</th>
+			  <th>Action</th>
             </tr>
-			<tr>
-				<th></th>
-				<th>
-					<input type="text" name="filter_category_id" id="filter_category_id" value="<?php echo $filter_category_id; ?>"  size="1" />
-				</th>
-				<th>
-					<input type="text" name="filter_category_name" id="filter_category_name" value="<?php echo $filter_category_name; ?>" size="8" />
-				</th>
-				<th>
-					<input type="text" name="filter_parent_id" id="filter_parent_id" value="" size="8" />
-				</th>
-				<th>
-					<select name="filter_status" id="filter_status">
-						<option value=""></option>
-						<option value="1" <?php echo ($filter_status == 1)?'selected="selected"':''; ?>>Active</option>
-						<option value="0" <?php echo ($filter_status === '0')?'selected="selected"':''; ?>>Inactive</option>
-					</select>
-				</th>
-				<th><input type="button" id="btnFliter" class="btn btn-info btn-sm" value="Filter" /></th>
-			</tr>
           </thead>
           <tbody>
 			<?php if(sizeof($rows)){ ?>
@@ -71,6 +51,7 @@ require_once('library/manage_categories_lib.php');
 						
 						</td>
 					</tr>
+					<?php echo getCategories($row['category_id']);?>
 				<?php } ?>
 			<?php }else{ ?>
 				<tr><td colspan="8" class="text-center text-danger">No record found!</td></tr>
@@ -78,29 +59,7 @@ require_once('library/manage_categories_lib.php');
           </tbody>
         </table>
 		
-<nav aria-label="...">
-  <ul class="pagination">
-    <li class="page-item disabled">
-      <span class="page-link">Previous</span>
-    </li>
-	
-	
-    <?php for($i = 1; $i <= $total_pages; $i++){ ?>
-	<?php if($i == $cur_page){ ?>
-	<li class="page-item active" aria-current="page">
-      <span class="page-link"><?php echo $i; ?></span>
-    </li>
-	<?php }else{ ?>
-	<li class="page-item"><a class="page-link" href="manage_categories.php?page=<?php echo $i; ?><?php echo $filter_url; ?>"><?php echo $i; ?></a></li>	
-	<?php } ?>
-	<?php } ?>
-	
-	
-    <li class="page-item">
-      <a class="page-link" href="#">Next</a>
-    </li>
-  </ul>
-</nav>
+
 
       </div>
     </form>
@@ -109,26 +68,5 @@ require_once('library/manage_categories_lib.php');
 
 <?php require_once('common/footer_upper.php'); ?>
 <?php require_once('common/footer_script.php'); ?>
-<script type="text/javascript">
 
-$('#btnFliter').click(function(){
-	var url = 'manage_categories.php?';
-	
-	var filter_category_id = $('#filter_category_id').val();
-	if(filter_category_id != ''){
-		url += '&filter_category_id=' + filter_category_id;
-	}
-	
-	var filter_category_name = $('#filter_category_name').val();
-	if(filter_category_name != ''){
-		url += '&filter_category_name=' + filter_category_name;
-	}
-	var filter_status = $('#filter_status').val();
-	if(filter_status != ''){
-		url += '&filter_status=' + filter_status;
-	}
-	
-	window.location.href = url;
-});
-</script>
 <?php require_once('common/footer_end.php'); ?>
