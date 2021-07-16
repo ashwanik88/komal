@@ -7,7 +7,7 @@ require_once('library/form_user_lib.php');
 
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-	<form action="" method="POST">
+	<form action="" method="POST" enctype="multipart/form-data">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2"><?php echo $document_title; ?></h1>
 		
@@ -41,6 +41,17 @@ require_once('library/form_user_lib.php');
 			<label for="cpassword" class="col-sm-2 col-form-label">Confirm Password</label>
 			<div class="col-sm-10">
 			  <input type="password" name="cpassword" id="cpassword" class="form-control" value="<?php echo $cpassword; ?>">
+			</div>
+		</div>
+		
+		<div class="mb-3 row">
+			<label for="profile_image" class="col-sm-2 col-form-label">Profile Image</label>
+			<div class="col-sm-10">
+			<?php if(isset($profile_image) && !empty($profile_image)){ ?>
+			<a href="<?php echo HTTP_UPLOADS . $profile_image; ?>" target="_blank"><img src="<?php echo HTTP_UPLOADS . $profile_image; ?>" width="100px" /></a>
+			<?php } ?>
+				
+			  <input type="file" name="profile_image" id="profile_image" class="form-control" >
 			</div>
 		</div>
 		

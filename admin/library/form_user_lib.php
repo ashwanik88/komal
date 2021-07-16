@@ -7,6 +7,7 @@ $password = '';
 $gender = '';
 $cpassword = '';
 $fullname = '';
+$profile_image = '';
 $email = '';
 $phone = '';
 $status = '1';
@@ -19,6 +20,7 @@ if($_GET){
 		
 		$username = $data['username'];
 		$fullname = $data['fullname'];
+		$profile_image = $data['profile_image'];
 		$email = $data['email'];
 		$gender = $data['gender'];
 		$phone = $data['phone'];
@@ -65,6 +67,18 @@ if($_POST){
 					addAlert('success', 'User has been added successfully');
 					$admin_id = mysqli_insert_id($con);
 				}
+				
+				if(isset($_FILES['profile_image']['name']) && !empty($_FILES['profile_image']['name'])){
+					$filename = 'users/' . time().'_'.$_FILES['profile_image']['name'];
+					$dest = DIR_UPLOADS.$filename;
+					$src = $_FILES['profile_image']['tmp_name'];
+	
+					move_uploaded_file($src, $dest); // copy()
+					
+					$sql = "UPDATE admin_users SET profile_image='". $filename ."' WHERE admin_id='". $admin_id ."'";
+					mysqli_query($con, $sql);
+				}
+				
 				
 				
 				redirect('form_user.php?admin_id=' . $admin_id);

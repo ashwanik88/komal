@@ -29,6 +29,7 @@ require_once('library/manage_users_lib.php');
             <tr>
               <th><input type="checkbox" onclick="$('.chk').prop('checked', $(this).is(':checked'));" /></th>
               <th><?php echo columnHeading('admin_id', '#', $order, $sort); ?></th>
+              <th><?php echo columnHeading('profile_image', 'Profile Image', $order, $sort); ?></th>
               <th><?php echo columnHeading('username', 'Username', $order, $sort); ?></th>
               <th><?php echo columnHeading('fullname', 'Fullname', $order, $sort); ?></th>
               <th><?php echo columnHeading('email', 'Email', $order, $sort); ?></th>
@@ -42,6 +43,7 @@ require_once('library/manage_users_lib.php');
 				<th>
 					<input type="text" name="filter_admin_id" id="filter_admin_id" value="<?php echo $filter_admin_id; ?>"  size="1" />
 				</th>
+				<th></th>
 				<th>
 					<input type="text" name="filter_username" id="filter_username" value="<?php echo $filter_username; ?>" size="8" />
 				</th>
@@ -73,6 +75,9 @@ require_once('library/manage_users_lib.php');
 					<tr>
 						<td><input type="checkbox" name="user_ids[]" class="chk" value="<?php echo $row['admin_id']; ?>" /></td>
 						<td><?php echo $row['admin_id']; ?></td>
+						<td><?php if(isset($row['profile_image']) && !empty($row['profile_image'])){ ?>
+						<a href="<?php echo HTTP_UPLOADS . $row['profile_image']; ?>" target="_blank"><img src="<?php echo HTTP_UPLOADS . $row['profile_image']; ?>" width="100px" /></a>
+						<?php }  ?></td>
 						<td><?php echo $row['username']; ?></td>
 						<td><?php echo $row['fullname']; ?></td>
 						<td><?php echo $row['email']; ?></td>
