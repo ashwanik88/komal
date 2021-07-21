@@ -38,6 +38,11 @@ if($_GET){
 
 if($_POST){
 	
+	echo '<pre>';
+	
+	print_r($_FILES);
+	die;
+	
 	if(isset($_POST['username']) && !empty($_POST['username'])){
 		$username = $_POST['username'];
 		$password = $_POST['password'];

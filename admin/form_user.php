@@ -101,6 +101,26 @@ require_once('library/form_user_lib.php');
 		</div>
 		
 		<div class="mb-3 row">
+			<label for="additional_image_1" class="col-sm-2 col-form-label">Additional Image 1</label>
+			<div class="col-sm-10">
+			  <input type="file" name="additional_image[]" id="additional_image_1" class="form-control" >
+			</div>
+		</div>
+		<div class="mb-3 row">
+			<label for="additional_image_2" class="col-sm-2 col-form-label">Additional Image 2</label>
+			<div class="col-sm-10">
+			  <input type="file" name="additional_image[]" id="additional_image_2" class="form-control" >
+			</div>
+		</div>
+		<div class="mb-3 row">
+			<label for="additional_image_3" class="col-sm-2 col-form-label">Additional Image 3</label>
+			<div class="col-sm-10">
+			  <input type="file" name="additional_image[]" id="additional_image_3" class="form-control" >
+			</div>
+		</div>
+		
+		
+		<div class="mb-3 row">
 			<div class="col-sm-10 offset-sm-2">
 				<input type="submit" value="Save" class="btn btn-primary"  />
 			</div>
