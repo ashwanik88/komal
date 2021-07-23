@@ -53,7 +53,7 @@ function getCategories($parent_id = 0, $sep = '', $selected_id = 0){
 			$html .= '<tr>';
 			$html .= '<td><input type="checkbox" name="category_ids[]" class="chk" value="'. $row['category_id'].'" /></td>';
 			$html .= '<td>'. $row['category_id'].'</td>';
-			$html .= '<td>'. $row['category_name'].'</td>';
+			$html .= '<td>'. getParents($row['parent_id']) . $row['category_name'].'</td>';
 			$html .= '<td>'. $row['parent_id'].'</td>';
 			$html .= '<td>'. (($row['status'])?'Active':'Inactive') .'</td>';
 			$html .= '<td>';
@@ -68,3 +68,4 @@ function getCategories($parent_id = 0, $sep = '', $selected_id = 0){
 	
 	return $html;
 }
+

@@ -28,3 +28,18 @@ function displayAlert(){
 function changeDateFormat($str){
 	return date('d/m/Y h:i:s A', strtotime($str));
 }
+
+function getParents($parent_id = 0, $sep = '', $selected_id = 0){
+	global $con;
+	$sql = "SELECT * FROM categories WHERE category_id='". (int)$parent_id ."'";
+	$rs = mysqli_query($con, $sql);
+	$html = '';
+	if(mysqli_num_rows($rs)){
+		while($row = mysqli_fetch_assoc($rs)){
+			$html .= getParents($row['parent_id'], $sep. ' > ', $selected_id);	// recursion
+			$html .= $row['category_name'] . ' > ';
+		}
+	}
+	
+	return $html;
+}

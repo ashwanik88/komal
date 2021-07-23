@@ -36,23 +36,7 @@ require_once('library/manage_categories_lib.php');
           </thead>
           <tbody>
 			<?php if(sizeof($rows)){ ?>
-				<?php foreach($rows as $row){ ?>
-					<tr>
-						<td><input type="checkbox" name="category_ids[]" class="chk" value="<?php echo $row['category_id']; ?>" /></td>
-						<td><?php echo $row['category_id']; ?></td>
-						<td><?php echo $row['category_name']; ?></td>
-						<td><?php echo $row['parent_id']; ?></td>
-						<td><?php echo ($row['status'])?'Active':'Inactive'; ?></td>
-						<td>
-							
-							<a href="manage_categories.php?category_id=<?php echo $row['category_id']; ?>" onclick="return confirm('Are you sure want to delete ?')">Delete</a> |
-							<a href="form_category.php?category_id=<?php echo $row['category_id']; ?>">Edit</a>
-						
-						
-						</td>
-					</tr>
-					<?php echo getCategories($row['category_id']);?>
-				<?php } ?>
+				<?php echo getCategories(0);?>
 			<?php }else{ ?>
 				<tr><td colspan="8" class="text-center text-danger">No record found!</td></tr>
 			<?php } ?>

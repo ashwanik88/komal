@@ -76,6 +76,18 @@ require_once('library/form_user_lib.php');
 			</div>
 		</div>
 		
+		
+		<div class="mb-3 row">
+			<label for="phone" class="col-sm-2 col-form-label">Assign Category</label>
+			<div class="col-sm-10">
+				<div style="max-height: 300px; overflow-y: auto;" >
+				<table class="table table-sm">
+			  <?php echo getCategories(0, '', $category_ids); ?>
+			  </table>
+			  </div>
+			</div>
+		</div>
+		
 		<div class="mb-3 row">
 			<label for="gender" class="col-sm-2 col-form-label">Gender</label>
 			<div class="col-sm-10">

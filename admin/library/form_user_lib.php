@@ -11,7 +11,7 @@ $profile_image = '';
 $email = '';
 $phone = '';
 $status = '1';
-
+$category_ids = array();
 if($_GET){
 	if(isset($_GET['admin_id']) && !empty($_GET['admin_id'])){
 		$admin_id = $_GET['admin_id'];
@@ -26,6 +26,8 @@ if($_GET){
 		$phone = $data['phone'];
 		$status = $data['status'];
 		
+		$category_ids = getProductCategory($admin_id);
+	
 		// foreach($data as $key => $val){
 			// $$key = $val;
 		// }
@@ -38,11 +40,7 @@ if($_GET){
 
 if($_POST){
 	
-	echo '<pre>';
-	
-	print_r($_FILES);
-	die;
-	
+
 	if(isset($_POST['username']) && !empty($_POST['username'])){
 		$username = $_POST['username'];
 		$password = $_POST['password'];
@@ -68,9 +66,18 @@ if($_POST){
 					}
 				}else{
 					$sql = "INSERT INTO admin_users SET username='". $username ."', password='". md5($password) ."', fullname='". $fullname ."', email='". $email ."', phone='". $phone ."', gender='". $gender ."', status='". (int)$status ."', date_added=NOW()";
+					
 					mysqli_query($con, $sql);
 					addAlert('success', 'User has been added successfully');
 					$admin_id = mysqli_insert_id($con);
+				}
+				
+				mysqli_query($con, "DELETE FROM product_category WHERE admin_id='". (int)$admin_id ."'");
+				if(isset($_POST['category_ids']) && !empty($_POST['category_ids'])){
+					foreach($_POST['category_ids'] as $category_id){
+						$sql = "INSERT INTO product_category SET admin_id='". (int)$admin_id ."' , category_id='". (int)$category_id ."'";
+						mysqli_query($con, $sql);
+					}
 				}
 				
 				if(isset($_FILES['profile_image']['name']) && !empty($_FILES['profile_image']['name'])){
@@ -86,9 +93,9 @@ if($_POST){
 				
 				
 				
-				redirect('form_user.php?admin_id=' . $admin_id);
+				// redirect('form_user.php?admin_id=' . $admin_id);
 				
-				//redirect('manage_users.php');
+				redirect('manage_users.php');
 		
 			}else{
 				addAlert('danger', 'Username already exists!');	
@@ -121,4 +128,38 @@ function getUser($admin_id){
 		//$rec = mysqli_fetch_object($rs);
 	}
 	return $rec;
+}
+
+function getCategories($parent_id = 0, $sep = '', $selected_id = 0){
+	global $con;
+	$sql = "SELECT * FROM categories WHERE parent_id='". (int)$parent_id ."'";
+	$rs = mysqli_query($con, $sql);
+	$html = '';
+	if(mysqli_num_rows($rs)){
+		while($row = mysqli_fetch_assoc($rs)){
+			$html .= '<tr>';
+			
+			$html .= '<td><input type="checkbox" name="category_ids[]" class="chk" value="'. $row['category_id'].'" '. ((in_array($row['category_id'], $selected_id) !== false)?'checked':'') .' /></td>';
+			$html .= '<td>'. getParents($row['parent_id']) . $row['category_name'].'</td>';
+			
+			$html .= '</tr>';
+			
+			$html .= getCategories($row['category_id'], $sep. '----', $selected_id);	// recursion
+		}
+	}
+	
+	return $html;
+}
+
+function getProductCategory($admin_id){
+	global $con;
+	$sql = "SELECT * FROM product_category WHERE admin_id='". $admin_id ."'";
+	$rs = mysqli_query($con, $sql);
+	$data = array();
+	if(mysqli_num_rows($rs)){
+		while($row = mysqli_fetch_assoc($rs)){
+			$data[] = $row['category_id'];
+		}
+	}
+	return $data;
 }
