@@ -1,0 +1,13 @@
+RewriteEngine On
+
+RewriteBase /komal/
+
+RewriteRule ^about$ page.php [L]
+RewriteRule ^sitemap.xml$ sitemap.php [L]
+RewriteRule ^googlebase.xml$ google.php [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !.*\.(ico|gif|jpg|jpeg|png|js|css)
+
+RewriteRule ^([^?]*) index.php?_route_=$1 [L,QSA]
