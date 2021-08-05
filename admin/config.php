@@ -1,4 +1,5 @@
 <?php 
+define('HTTP_SERVER', 'http://localhost/komal/admin/');
 define('HTTP_UPLOADS', 'http://localhost/komal/uploads/');
 define('DIR_UPLOADS', 'D:/wamp/www/komal/uploads/');
 
